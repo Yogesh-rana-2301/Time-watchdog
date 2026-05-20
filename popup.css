@@ -1,0 +1,119 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap");
+
+:root {
+  --background-color: #ffffff;
+  --text-color: #333333;
+  --timer-background: #f8f8f8;
+  --timer-text: #333333;
+  --button-background: #e9e9e9;
+  --button-text: #333333;
+  --button-hover-background: #dcdcdc;
+  --accent-color: #555555;
+  --border-color: #e0e0e0;
+  --shadow-color: rgba(0, 0, 0, 0.05);
+}
+
+body {
+  font-family:
+    "Inter",
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    Helvetica,
+    Arial,
+    sans-serif;
+  width: 300px;
+  padding: 16px;
+  background-color: var(--background-color);
+  color: var(--text-color);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+}
+
+.timer-display {
+  font-family: "Inter", monospace;
+  font-size: 3em;
+  font-weight: 600;
+  color: var(--timer-text);
+  background-color: var(--timer-background);
+  padding: 20px;
+  border-radius: 12px;
+  width: 100%;
+  box-sizing: border-box;
+  text-align: center;
+  letter-spacing: -1px;
+  border: 1px solid var(--border-color);
+}
+
+.button-group {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  width: 100%;
+}
+
+button {
+  flex-grow: 1;
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+  padding: 12px 0;
+  font-size: 0.95em;
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    background-color 0.2s ease,
+    transform 0.1s ease;
+  background-color: var(--button-background);
+  color: var(--button-text);
+  box-shadow: 0 1px 2px var(--shadow-color);
+}
+
+button:hover {
+  background-color: var(--button-hover-background);
+}
+
+button:active {
+  transform: scale(0.97);
+  box-shadow: none;
+}
+
+#start-stopwatch,
+.countdown-btn {
+  background-color: var(--accent-color);
+  color: white;
+  border-color: transparent;
+}
+#start-stopwatch:hover,
+.countdown-btn:hover {
+  background-color: #444;
+}
+
+#stop-stopwatch,
+#stop-countdown {
+  background-color: var(--button-background);
+  color: var(--button-text);
+}
+
+#reset-stopwatch,
+#reset-countdown {
+  background-color: var(--button-background);
+  color: var(--button-text);
+}
+
+.countdown-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 12px;
+  border-top: 1px solid var(--border-color);
+  padding-top: 24px;
+}

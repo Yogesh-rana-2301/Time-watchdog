@@ -1,0 +1,29 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Stopwatch & Countdown</title>
+    <link rel="stylesheet" type="text/css" href="popup.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="timer-display">00:00:00</div>
+      <div class="button-group">
+        <button id="start-stopwatch">Start</button>
+        <button id="stop-stopwatch">Stop</button>
+        <button id="reset-stopwatch">Reset</button>
+      </div>
+      <div class="countdown-container">
+        <div class="button-group">
+          <button class="countdown-btn" data-time="300">5 min</button>
+          <button class="countdown-btn" data-time="1200">20 min</button>
+          <button class="countdown-btn" data-time="2400">40 min</button>
+        </div>
+        <div class="button-group">
+          <button id="stop-countdown">Stop</button>
+          <button id="reset-countdown">Reset</button>
+        </div>
+      </div>
+    </div>
+    <script src="popup.js"></script>
+  </body>
+</html>
