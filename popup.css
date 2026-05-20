@@ -1,7 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap");
 
 :root {
-  --background-color: #ffffff;
+  --background-color: #dcdcdc;
   --text-color: #333333;
   --timer-background: #f8f8f8;
   --timer-text: #333333;
@@ -31,20 +31,52 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+.nav {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin-bottom: 16px;
+  background-color: var(--button-background);
+  border-radius: 10px;
+  padding: 4px;
+}
+
+.nav-btn {
+  flex-grow: 1;
+  border: none;
+  background-color: transparent;
+  padding: 8px 0;
+  font-size: 0.9em;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  border-radius: 8px;
+  color: var(--button-text);
+}
+
+.nav-btn.active {
+  background-color: var(--background-color);
+  box-shadow: 0 1px 3px var(--shadow-color);
+}
+
+.hidden {
+  display: none !important;
+}
+
 .container {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 24px;
+  gap: 16px;
 }
 
 .timer-display {
   font-family: "Inter", monospace;
-  font-size: 3em;
+  font-size: 2.8em;
   font-weight: 600;
   color: var(--timer-text);
   background-color: var(--timer-background);
-  padding: 20px;
+  padding: 16px;
   border-radius: 12px;
   width: 100%;
   box-sizing: border-box;
@@ -64,7 +96,9 @@ button {
   flex-grow: 1;
   border: 1px solid var(--border-color);
   border-radius: 10px;
-  padding: 12px 0;
+  padding: 6px 0;
+  padding-left: 10px;
+  padding-right: 10px;
   font-size: 0.95em;
   font-weight: 600;
   cursor: pointer;
@@ -108,12 +142,9 @@ button:active {
   color: var(--button-text);
 }
 
-.countdown-container {
+#countdown-controls {
   width: 100%;
   display: flex;
   flex-direction: column;
   gap: 12px;
-  margin-top: 12px;
-  border-top: 1px solid var(--border-color);
-  padding-top: 24px;
 }

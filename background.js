@@ -5,6 +5,7 @@ chrome.runtime.onInstalled.addListener(() => {
     isStopwatchRunning: false,
     isCountdownRunning: false,
     countdownEndTime: 0,
+    wasCountdownRunning: false,
   });
 });
 
@@ -34,6 +35,7 @@ chrome.alarms.onAlarm.addListener((alarm) => {
             chrome.storage.local.set({
               isCountdownRunning: false,
               countdownTime: 0,
+              wasCountdownRunning: false,
             });
           }
         }
@@ -59,10 +61,28 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
       isStopwatchRunning: false,
       countdownTime: request.time,
       countdownEndTime: endTime,
+      wasCountdownRunning: true,
     });
+  } else if (request.command === "resume-countdown") {
+    chrome.storage.local.get(
+      ["countdownTime", "wasCountdownRunning"],
+      (res) => {
+        if (res.wasCountdownRunning && res.countdownTime > 0) {
+          const endTime = Date.now() + res.countdownTime * 1000;
+          chrome.storage.local.set({
+            isCountdownRunning: true,
+            countdownEndTime: endTime,
+          });
+        }
+      },
+    );
   } else if (request.command === "stop-countdown") {
     chrome.storage.local.set({ isCountdownRunning: false });
   } else if (request.command === "reset-countdown") {
-    chrome.storage.local.set({ isCountdownRunning: false, countdownTime: 0 });
+    chrome.storage.local.set({
+      isCountdownRunning: false,
+      countdownTime: 0,
+      wasCountdownRunning: false,
+    });
   }
 });
