@@ -46,9 +46,11 @@ chrome.alarms.onAlarm.addListener((alarm) => {
 
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
   if (request.command === "start-stopwatch") {
-    chrome.storage.local.set({
-      isStopwatchRunning: true,
-      isCountdownRunning: false,
+    chrome.storage.local.get(["isCountdownRunning"], (res) => {
+      chrome.storage.local.set({
+        isStopwatchRunning: true,
+        isCountdownRunning: res.isCountdownRunning === true,
+      });
     });
   } else if (request.command === "stop-stopwatch") {
     chrome.storage.local.set({ isStopwatchRunning: false });
@@ -56,12 +58,14 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     chrome.storage.local.set({ isStopwatchRunning: false, stopwatchTime: 0 });
   } else if (request.command === "start-countdown") {
     const endTime = Date.now() + request.time * 1000;
-    chrome.storage.local.set({
-      isCountdownRunning: true,
-      isStopwatchRunning: false,
-      countdownTime: request.time,
-      countdownEndTime: endTime,
-      wasCountdownRunning: true,
+    chrome.storage.local.get(["isStopwatchRunning"], (res) => {
+      chrome.storage.local.set({
+        isCountdownRunning: true,
+        isStopwatchRunning: res.isStopwatchRunning === true,
+        countdownTime: request.time,
+        countdownEndTime: endTime,
+        wasCountdownRunning: true,
+      });
     });
   } else if (request.command === "resume-countdown") {
     chrome.storage.local.get(

@@ -7,13 +7,13 @@
   <body>
     <div class="container">
       <div class="nav">
-        <button id="show-timer" class="nav-btn active">Timer</button>
-        <button id="show-countdown" class="nav-btn">Countdown</button>
+        <button id="show-timer" class="nav-btn">Timer</button>
+        <button id="show-countdown" class="nav-btn active">Countdown</button>
       </div>
 
       <div class="timer-display">00:00:00</div>
 
-      <div id="timer-controls">
+      <div id="timer-controls" class="hidden">
         <div class="button-group">
           <button id="start-stopwatch">Start</button>
           <button id="stop-stopwatch">Stop</button>
@@ -21,7 +21,7 @@
         </div>
       </div>
 
-      <div id="countdown-controls" class="hidden">
+      <div id="countdown-controls">
         <div class="button-group">
           <button class="countdown-btn" data-time="300">5 min</button>
           <button class="countdown-btn" data-time="1200">20 min</button>

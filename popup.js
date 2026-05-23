@@ -4,7 +4,7 @@ const countdownControls = document.getElementById("countdown-controls");
 const showTimerBtn = document.getElementById("show-timer");
 const showCountdownBtn = document.getElementById("show-countdown");
 
-let currentView = "timer";
+let currentView = "countdown";
 
 function formatTime(time) {
   const hours = Math.floor(time / 3600);
@@ -85,4 +85,4 @@ document.getElementById("reset-countdown").addEventListener("click", () => {
 
 setInterval(updateDisplay, 100);
 updateDisplay();
-showTimer();
+showCountdown();
