@@ -6,6 +6,8 @@ chrome.runtime.onInstalled.addListener(() => {
     isCountdownRunning: false,
     countdownEndTime: 0,
     wasCountdownRunning: false,
+    countdownCompleted: false,
+    countdownNotified: false,
   });
 });
 
@@ -30,12 +32,13 @@ chrome.alarms.onAlarm.addListener((alarm) => {
           if (remaining > 0) {
             chrome.storage.local.set({
               countdownTime: Math.ceil(remaining / 1000),
+              countdownCompleted: false,
             });
           } else {
+            const elapsed = Math.ceil(Math.abs(remaining) / 1000);
             chrome.storage.local.set({
-              isCountdownRunning: false,
-              countdownTime: 0,
-              wasCountdownRunning: false,
+              countdownTime: -elapsed,
+              countdownCompleted: true,
             });
           }
         }
@@ -65,6 +68,8 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
         countdownTime: request.time,
         countdownEndTime: endTime,
         wasCountdownRunning: true,
+        countdownCompleted: false,
+        countdownNotified: false,
       });
     });
   } else if (request.command === "resume-countdown") {
@@ -87,6 +92,8 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
       isCountdownRunning: false,
       countdownTime: 0,
       wasCountdownRunning: false,
+      countdownCompleted: false,
+      countdownNotified: false,
     });
   }
 });

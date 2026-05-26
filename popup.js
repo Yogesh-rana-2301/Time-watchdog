@@ -3,14 +3,20 @@ const timerControls = document.getElementById("timer-controls");
 const countdownControls = document.getElementById("countdown-controls");
 const showTimerBtn = document.getElementById("show-timer");
 const showCountdownBtn = document.getElementById("show-countdown");
+const countdownNotice = document.getElementById("countdown-notice");
 
 let currentView = "countdown";
 
 function formatTime(time) {
-  const hours = Math.floor(time / 3600);
-  const minutes = Math.floor((time % 3600) / 60);
-  const seconds = time % 60;
-  return [hours, minutes, seconds].map((v) => (v < 10 ? "0" + v : v)).join(":");
+  const isNegative = time < 0;
+  const absTime = Math.abs(time);
+  const hours = Math.floor(absTime / 3600);
+  const minutes = Math.floor((absTime % 3600) / 60);
+  const seconds = absTime % 60;
+  const formatted = [hours, minutes, seconds]
+    .map((v) => (v < 10 ? "0" + v : v))
+    .join(":");
+  return isNegative ? "-" + formatted : formatted;
 }
 
 function updateDisplay() {
@@ -20,12 +26,17 @@ function updateDisplay() {
       "countdownTime",
       "isStopwatchRunning",
       "isCountdownRunning",
+      "countdownCompleted",
     ],
     (res) => {
       if (currentView === "timer") {
         timerDisplay.textContent = formatTime(res.stopwatchTime);
+        timerDisplay.classList.remove("blinking");
+        countdownNotice.classList.add("hidden");
       } else {
         timerDisplay.textContent = formatTime(res.countdownTime);
+        timerDisplay.classList.toggle("blinking", res.countdownCompleted);
+        countdownNotice.classList.toggle("hidden", !res.countdownCompleted);
       }
     },
   );

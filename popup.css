@@ -85,6 +85,34 @@ body {
   border: 1px solid var(--border-color);
 }
 
+.timer-display.blinking {
+  animation: timer-blink 0.9s steps(1, end) infinite;
+}
+
+.notice {
+  width: 100%;
+  text-align: center;
+  font-size: 0.9em;
+  font-weight: 600;
+  padding: 8px 10px;
+  border-radius: 10px;
+  background-color: #fff3bf;
+  color: #6b4f00;
+  border: 1px solid #ffe58f;
+  box-sizing: border-box;
+}
+
+@keyframes timer-blink {
+  0%,
+  50% {
+    opacity: 1;
+  }
+  51%,
+  100% {
+    opacity: 0.2;
+  }
+}
+
 .button-group {
   display: flex;
   justify-content: center;
